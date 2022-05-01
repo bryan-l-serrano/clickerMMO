@@ -30,6 +30,25 @@ const storeId = async (id:string) =>{
   }
 }
 
+const getClicks = async () =>{
+  try{
+    const userClicks = await AsyncStorage.getItem("@clicks");
+    return userClicks;
+  }
+  catch(e){
+    console.log("failed to load clicks")
+  }
+}
+
+const getId = async () =>{
+  try{
+    const id = await AsyncStorage.getItem("@id");
+    return id;
+  }
+  catch(e){
+    console.log("failed to getId");
+  }
+}
 
 
 
