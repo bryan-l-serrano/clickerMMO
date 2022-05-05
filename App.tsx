@@ -1,61 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import uuid from 'react-native-uuid'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import ClickerComp from './components/ClickerComp';
 
-
-
-const generateId = () =>{
-  let id = uuid.v4();
-  let idString = id.toString();
-  return idString;
-}
-
-const storeClicks =  async (userClicks:number) =>{
-  try{
-    AsyncStorage.setItem("@clicks", userClicks.toString());
-  }
-  catch(e){
-    console.log("failed to store clicks");
-  }
-}
-
-const storeId = async (id:string) =>{
-  try{
-    AsyncStorage.setItem("@id", id);
-  }
-  catch(e){
-    console.log("failed to store id");
-  }
-}
-
-const getClicks = async () =>{
-  try{
-    const userClicks = await AsyncStorage.getItem("@clicks");
-    return userClicks;
-  }
-  catch(e){
-    console.log("failed to load clicks")
-  }
-}
-
-const getId = async () =>{
-  try{
-    const id = await AsyncStorage.getItem("@id");
-    return id;
-  }
-  catch(e){
-    console.log("failed to getId");
-  }
-}
 
 
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <ClickerComp></ClickerComp>
       <StatusBar style="auto" />
     </View>
   );
