@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import uuid from 'react-native-uuid'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {io} from 'socket.io-client';
 
 const generateId = () => {
   let id = uuid.v4();
@@ -69,11 +69,19 @@ class ClickerComp extends Component<ClickerCompProps, ClickerCompState>{
       uuid: "",
       clicks: 0,
       rank: 0
-
     }
   };
 
   componentDidMount() {
+    const socket = io("http://127.0.0.1:6789", {transports:['websocket'],});
+    socket.connect();
+    socket.emit('click',this.state.uuid);
+    // socket.on("updateClicks", (val: { globalClicks: any; rank: any; })=>{
+    //   this.setState({globalClicks:val.globalClicks, rank:val.rank})
+    // });
+    // this.socket.on("globalClicks", (val: { globalClicks: any; })=>{
+    //   this.setState({globalClicks:val.globalClicks});
+    // });
     getId().then((userid) => {
       if (userid) {
         this.setState({ uuid: userid })
@@ -93,7 +101,9 @@ class ClickerComp extends Component<ClickerCompProps, ClickerCompState>{
 onSingleClick() {
   this.setState({clicks: this.state.clicks + 1});
   storeClicks(this.state.clicks);
+  console.log('clicked: ' + this.state.uuid);
 }
+
 
   render() {
     return (
