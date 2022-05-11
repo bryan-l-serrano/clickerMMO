@@ -20,7 +20,6 @@ io.on('connection', (socket) =>{
         if (cycles % 100 == 0){
             playerData.sort((a,b) => b.clicks - a.clicks);
         }
-        //user = playerData.filter(function(item){return item.uuid == val.uuid});
         user = playerData.find(item => item.uuid == val.uuid);
         if (user){
             user.clicks +=1;
