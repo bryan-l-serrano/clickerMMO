@@ -74,7 +74,11 @@ class ClickerComp extends Component<ClickerCompProps, ClickerCompState>{
   };
 
   componentDidMount() {
-    this.socket = io("127.0.0.1:6788", {transports:['websocket'],});
+    this.socket = io("108.32.52.27:6789", {transports:['websocket'],});
+
+    this.socket.on('connect_error', (err: any)=>{
+      console.log(err.message);
+    })
 
     this.socket.on('connect', ()=>{
       console.log('connected on the ui');

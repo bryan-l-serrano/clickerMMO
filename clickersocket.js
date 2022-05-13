@@ -6,8 +6,8 @@ globalClicks = 0;
 cycles = 0
 playerData = [];
 
-http.listen(6788, () =>{
-    console.log("listening on port 6788");
+http.listen(6789, () =>{
+    console.log("listening on port 6789");
 });
 
 io.on('connection', (socket) =>{
